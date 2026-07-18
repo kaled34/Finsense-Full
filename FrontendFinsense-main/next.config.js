@@ -5,12 +5,15 @@ const nextConfig = {
     domains: [],
     unoptimized: true,
   },
-  webpack: (config, { nextRuntime }) => {
-    // Mock __dirname for the edge runtime to prevent ReferenceError
+  webpack: (config, { nextRuntime, webpack }) => {
+    // Mock __dirname y __filename para el entorno Edge usando DefinePlugin
     if (nextRuntime === 'edge') {
-      config.node = {
-        __dirname: true,
-      };
+      config.plugins.push(
+        new webpack.DefinePlugin({
+          __dirname: '"/"',
+          __filename: '"/index.js"',
+        })
+      );
     }
     return config;
   },
