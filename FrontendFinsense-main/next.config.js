@@ -37,4 +37,22 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   },
 });
 
-module.exports = withPWA(nextConfig);
+const pwaConfig = withPWA(nextConfig);
+
+// Sobrescribimos webpack después del wrapper de PWA para aplicar el DefinePlugin al final
+const originalWebpack = pwaConfig.webpack;
+pwaConfig.webpack = (config, options) => {
+  const resolvedConfig = originalWebpack ? originalWebpack(config, options) : config;
+  
+  if (options.nextRuntime === 'edge') {
+    resolvedConfig.plugins.push(
+      new options.webpack.DefinePlugin({
+        __dirname: '"/"',
+        __filename: '"/index.js"',
+      })
+    );
+  }
+  return resolvedConfig;
+};
+
+module.exports = pwaConfig;
