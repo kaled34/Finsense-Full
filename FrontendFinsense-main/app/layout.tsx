@@ -83,6 +83,13 @@ export default function RootLayout({
  <head>
  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
  <meta name="mobile-web-app-capable" content="yes" />
+ <script dangerouslySetInnerHTML={{ __html: `
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  ` }} />
  </head>
  <body className="font-dm bg-surface text-text-primary antialiased">
  <ThemeProvider>
