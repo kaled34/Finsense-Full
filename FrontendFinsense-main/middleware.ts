@@ -6,38 +6,6 @@ const TOKEN_KEY = 'finsense_token';
 const PUBLIC_ROUTES = ['/auth'];
 const AUTH_ROUTE = '/auth';
 
-/**
- * Decode a JWT payload without verifying the signature.
- * Middleware runs on the Edge runtime, so we cannot use jsonwebtoken.
- * Signature verification is done on the backend for every protected API call.
- */
-function decodeJwtExpiry(token: string): number | null {
-  try {
-    const parts = token.split('.');
-    if (parts.length !== 3) return null;
-    // Base64url → Base64 → JSON using Web API atob (compatible with Edge Runtime)
-    const base64Url = parts[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split('')
-        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
-    );
-    const payload = JSON.parse(jsonPayload);
-    return typeof payload.exp === 'number' ? payload.exp : null;
-  } catch {
-    return null;
-  }
-}
-
-function isTokenExpired(token: string): boolean {
-  const exp = decodeJwtExpiry(token);
-  if (exp === null) return true; // Treat unreadable tokens as expired
-  // Add a 10-second buffer to avoid edge-case races
-  return Date.now() / 1000 >= exp - 10;
-}
-
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -57,17 +25,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // Expired token → clear cookie and redirect to login
-  if (isTokenExpired(token)) {
-    const loginUrl = new URL(AUTH_ROUTE, request.url);
-    loginUrl.searchParams.set('redirect', pathname);
-    loginUrl.searchParams.set('reason', 'session_expired');
-    const response = NextResponse.redirect(loginUrl);
-    // Clear the stale cookie so the next request is clean
-    response.cookies.set(TOKEN_KEY, '', { maxAge: 0, path: '/' });
-    return response;
-  }
-
+  // Si tiene token, permitimos el acceso.
+  // La validación de expiración y firma la hará el Backend en cada petición de la API,
+  // y si expira, el frontend redirigirá a login automáticamente por interceptores de Axios.
   return NextResponse.next();
 }
 
