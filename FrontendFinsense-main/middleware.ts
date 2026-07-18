@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { TOKEN_KEY, PUBLIC_ROUTES, AUTH_ROUTE } from '@/lib/constants';
+import { TOKEN_KEY, PUBLIC_ROUTES, AUTH_ROUTE } from './lib/constants';
 
 /**
  * Decode a JWT payload without verifying the signature.
@@ -11,10 +11,16 @@ function decodeJwtExpiry(token: string): number | null {
   try {
     const parts = token.split('.');
     if (parts.length !== 3) return null;
-    // Base64url → Base64 → JSON
-    const payload = JSON.parse(
-      Buffer.from(parts[1].replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString('utf8'),
+    // Base64url → Base64 → JSON using Web API atob (compatible with Edge Runtime)
+    const base64Url = parts[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
     );
+    const payload = JSON.parse(jsonPayload);
     return typeof payload.exp === 'number' ? payload.exp : null;
   } catch {
     return null;
