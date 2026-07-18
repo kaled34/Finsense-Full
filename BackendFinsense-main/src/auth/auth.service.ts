@@ -70,7 +70,7 @@ export class AuthService {
   async refresh(token: string) {
     try {
       const payload = this.jwt.verify(token, {
-        secret: this.config.get('JWT_REFRESH_SECRET'),
+        secret: this.config.get('JWT_REFRESH_SECRET') || 'default_jwt_refresh_secret_key_12345',
       });
       return this.generateTokens(payload.sub, payload.email);
     } catch {
@@ -214,12 +214,12 @@ export class AuthService {
   private generateTokens(userId: string, email: string) {
     const payload = { sub: userId, email };
     const accessToken = this.jwt.sign(payload, {
-      secret: this.config.get('JWT_SECRET'),
-      expiresIn: this.config.get('JWT_EXPIRES_IN'),
+      secret: this.config.get('JWT_SECRET') || 'super_secret_jwt_key_12345',
+      expiresIn: this.config.get('JWT_EXPIRES_IN') || '1d',
     });
     const refreshToken = this.jwt.sign(payload, {
-      secret: this.config.get('JWT_REFRESH_SECRET'),
-      expiresIn: this.config.get('JWT_REFRESH_EXPIRES_IN'),
+      secret: this.config.get('JWT_REFRESH_SECRET') || 'default_jwt_refresh_secret_key_12345',
+      expiresIn: this.config.get('JWT_REFRESH_EXPIRES_IN') || '7d',
     });
     return { accessToken, refreshToken };
   }
