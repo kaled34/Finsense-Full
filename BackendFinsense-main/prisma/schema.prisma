@@ -1,0 +1,390 @@
+// This is your Prisma schema file
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Usuarios ────────────────────────────────────────────────
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash") @db.Text
+  name         String
+  city         String   @default("Tuxtla Gutiérrez")
+  avatar       String?
+  themeColor   String?  @map("theme_color")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  transactions          Transaction[]
+  goals                 Goal[]
+  streak                Streak?
+  userXp                UserXp?
+  notifications         Notification[]
+  subscriptions         Subscription[]
+  groupMembers          GroupMember[]
+  groupExpenses         GroupExpense[]
+  groupMessages         GroupMessage[]
+  budgets               Budget[]
+  investments           Investment[]
+  challengesCreated     Challenge[]          @relation("ChallengeCreator")
+  challengeParticipants ChallengeParticipant[]
+  calendarEvents        CalendarEvent[]
+  friendshipsInitiated  Friendship[]         @relation("UserFriends")
+  friendshipsReceived   Friendship[]         @relation("FriendUsers")
+
+  @@map("users")
+}
+
+// ─── Categorías ──────────────────────────────────────────────
+model Category {
+  id       String @id @default(uuid())
+  name     String @unique
+  keywords String @db.Text // JSON array stored as string
+  icon     String
+  color    String
+
+  transactions Transaction[]
+  budgets      Budget[]
+  challenges   Challenge[]
+
+  @@map("categories")
+}
+
+// ─── Transacciones ───────────────────────────────────────────
+model Transaction {
+  id          String          @id @default(uuid())
+  userId      String          @map("user_id")
+  amount      Decimal         @db.Decimal(10, 2)
+  type        TransactionType
+  categoryId  String?         @map("category_id")
+  description String?         @db.Text
+  date        DateTime        @default(now())
+  groupId     String?         @map("group_id")
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category? @relation(fields: [categoryId], references: [id])
+  group    Group?    @relation(fields: [groupId], references: [id])
+
+  @@index([userId])
+  @@index([userId, date])
+  @@index([categoryId])
+  @@index([groupId])
+  @@map("transactions")
+}
+
+enum TransactionType {
+  income
+  expense
+}
+
+// ─── Metas de ahorro ─────────────────────────────────────────
+enum GoalStatus {
+  active
+  completed
+}
+
+model Goal {
+  id            String     @id @default(uuid())
+  userId        String     @map("user_id")
+  name          String
+  targetAmount  Decimal    @map("target_amount") @db.Decimal(10, 2)
+  currentAmount Decimal    @default(0) @map("current_amount") @db.Decimal(10, 2)
+  deadline      DateTime?
+  icon          String     @default("target")
+  color         String     @default("#8B5CF6")
+  status        GoalStatus @default(active)
+  createdAt     DateTime   @default(now()) @map("created_at")
+  groupId       String?    @map("group_id")
+
+  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group Group? @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([groupId])
+  @@map("goals")
+}
+
+// ─── Rachas ──────────────────────────────────────────────────
+model Streak {
+  id            String    @id @default(uuid())
+  userId        String    @unique @map("user_id")
+  currentStreak Int       @default(0) @map("current_streak")
+  longestStreak Int       @default(0) @map("longest_streak")
+  lastEntryDate DateTime? @map("last_entry_date")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("streaks")
+}
+
+// ─── XP y niveles ────────────────────────────────────────────
+model UserXp {
+  id           String @id @default(uuid())
+  userId       String @unique @map("user_id")
+  totalXp      Int    @default(0) @map("total_xp")
+  level        Int    @default(1)
+  coins        Int    @default(0)
+  inventory    String @default("[]") @db.VarChar(1000)
+  badges       String @default("[]") @db.VarChar(500)
+  equippedSkin String @default("default") @map("equipped_skin")
+  chests       Int    @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_xp")
+}
+
+// ─── Suscripciones ───────────────────────────────────────────
+model Subscription {
+  id              String    @id @default(uuid())
+  userId          String    @map("user_id")
+  name            String
+  cost            Decimal   @db.Decimal(10, 2)
+  currency        String    @default("MXN")
+  billingCycle    String    @default("monthly")
+  nextBillingDate DateTime  @map("next_billing_date")
+  status          String    @default("active")
+  category        String    @default("other")
+  iconUrl         String?   @map("icon_url")
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("subscriptions")
+}
+
+// ─── Grupos colaborativos ────────────────────────────────────
+model Group {
+  id        String   @id @default(uuid())
+  name      String
+  createdBy String   @map("created_by")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  members      GroupMember[]
+  expenses     GroupExpense[]
+  transactions Transaction[]
+  challenges   Challenge[]
+  goals        Goal[]
+  messages     GroupMessage[]
+
+  @@map("groups")
+}
+
+model GroupMessage {
+  id        String   @id @default(uuid())
+  groupId   String   @map("group_id")
+  senderId  String   @map("sender_id")
+  content   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+
+  group  Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  sender User  @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([groupId])
+  @@index([senderId])
+  @@map("group_messages")
+}
+
+model GroupMember {
+  id      String @id @default(uuid())
+  groupId String @map("group_id")
+  userId  String @map("user_id")
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@unique([groupId, userId])
+  @@map("group_members")
+}
+
+model GroupExpense {
+  id           String   @id @default(uuid())
+  groupId      String   @map("group_id")
+  paidBy       String   @map("paid_by")
+  amount       Decimal  @db.Decimal(10, 2)
+  description  String   @db.Text
+  splitBetween String   @map("split_between") @db.Text // JSON array
+  date         DateTime @default(now())
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [paidBy], references: [id])
+
+  @@index([groupId])
+  @@index([paidBy])
+  @@map("group_expenses")
+}
+
+// ─── Benchmarks locales ──────────────────────────────────────
+model CityBenchmark {
+  id           String   @id @default(uuid())
+  city         String
+  category     String
+  month        String   // "2026-05"
+  avgAmount    Decimal  @map("avg_amount") @db.Decimal(10, 2)
+  percentile25 Decimal  @map("percentile_25") @db.Decimal(10, 2)
+  percentile75 Decimal  @map("percentile_75") @db.Decimal(10, 2)
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@unique([city, category, month])
+  @@map("city_benchmarks")
+}
+
+// ─── Notificaciones ──────────────────────────────────────────
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String           @map("user_id")
+  type      NotificationType
+  title     String
+  body      String           @db.Text
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, read])
+  @@map("notifications")
+}
+
+enum NotificationType {
+  budget_exceeded
+  streak_at_risk
+  goal_deadline
+  reminder
+  badge_earned
+  spending_anomaly
+  subscription_reminder
+  budget_warning
+  challenge_invite
+  group_invite
+}
+
+// ─── Presupuestos por categoría ──────────────────────────────
+model Budget {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  categoryId  String   @map("category_id")
+  limitAmount Decimal  @map("limit_amount") @db.Decimal(10, 2)
+  month       String   // "2026-07"
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id])
+
+  @@unique([userId, categoryId, month])
+  @@index([userId])
+  @@index([categoryId])
+  @@map("budgets")
+}
+
+// ─── Inversiones ─────────────────────────────────────────────
+model Investment {
+  id            String   @id @default(uuid())
+  userId        String   @map("user_id")
+  name          String
+  type          String   // "stock", "crypto", "bonds", "real_estate", "savings", "other"
+  ticker        String?
+  shares        Decimal? @db.Decimal(10, 4)
+  initialAmount Decimal  @map("initial_amount") @db.Decimal(10, 2)
+  currentValue  Decimal  @map("current_value") @db.Decimal(10, 2)
+  purchaseDate  DateTime @map("purchase_date")
+  notes         String?  @db.Text
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("investments")
+}
+
+// ─── Retos entre amigos ───────────────────────────────────────
+model Challenge {
+  id            String          @id @default(uuid())
+  groupId       String          @map("group_id")
+  createdBy     String          @map("created_by")
+  title         String
+  description   String?         @db.Text
+  categoryId    String?         @map("category_id")
+  targetAmount  Decimal         @map("target_amount") @db.Decimal(10, 2)
+  startDate     DateTime        @map("start_date")
+  endDate       DateTime        @map("end_date")
+  status        ChallengeStatus @default(active)
+  createdAt     DateTime        @default(now()) @map("created_at")
+
+  group     Group             @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  creator   User              @relation("ChallengeCreator", fields: [createdBy], references: [id])
+  category  Category?         @relation(fields: [categoryId], references: [id])
+  participants ChallengeParticipant[]
+
+  @@index([groupId])
+  @@index([createdBy])
+  @@index([categoryId])
+  @@map("challenges")
+}
+
+model ChallengeParticipant {
+  id          String   @id @default(uuid())
+  challengeId String   @map("challenge_id")
+  userId      String   @map("user_id")
+  accepted    Boolean  @default(false)
+  won         Boolean? 
+
+  challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([challengeId, userId])
+  @@index([userId])
+  @@index([challengeId])
+  @@map("challenge_participants")
+}
+
+enum ChallengeStatus {
+  active
+  completed
+  cancelled
+}
+
+// ─── Eventos del Calendario ──────────────────────────────────
+model CalendarEvent {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  title     String
+  amount    Decimal? @db.Decimal(10, 2)
+  date      DateTime
+  emoji     String?
+  type      String   @default("custom")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, date])
+  @@map("calendar_events")
+}
+
+// ─── Amigos ──────────────────────────────────────────────────
+model Friendship {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  friendId  String   @map("friend_id")
+  status    String   @default("accepted") // For now we default to accepted (following model)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User     @relation("UserFriends", fields: [userId], references: [id], onDelete: Cascade)
+  friend    User     @relation("FriendUsers", fields: [friendId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, friendId])
+  @@index([userId])
+  @@index([friendId])
+  @@map("friendships")
+}
+
