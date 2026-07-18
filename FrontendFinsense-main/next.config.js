@@ -5,6 +5,15 @@ const nextConfig = {
     domains: [],
     unoptimized: true,
   },
+  webpack: (config, { nextRuntime }) => {
+    // Mock __dirname for the edge runtime to prevent ReferenceError
+    if (nextRuntime === 'edge') {
+      config.node = {
+        __dirname: true,
+      };
+    }
+    return config;
+  },
 };
 
 const withPWA = require('@ducanh2912/next-pwa').default({
@@ -13,7 +22,8 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   aggressiveFrontEndNavCaching: true,
   reloadOnOnline: true,
   swcMinify: true,
-  disable: true,
+  // Desactivamos en desarrollo, habilitamos en producción
+  disable: process.env.NODE_ENV === 'development',
   workboxOptions: {
     disableDevLogs: true,
     exclude: [
@@ -24,4 +34,4 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   },
 });
 
-module.exports = nextConfig;
+module.exports = withPWA(nextConfig);
