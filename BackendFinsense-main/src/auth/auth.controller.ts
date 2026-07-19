@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, UseGuards, Req, Query } from '@nestjs/common';
+import { Controller, Post, Body, Get, Patch, UseGuards, Req, Query } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { RegisterDto, LoginDto, RefreshDto } from './auth.dto';
@@ -38,5 +38,11 @@ export class AuthController {
   @Get('users/search')
   searchUsers(@Req() req: any, @Query('q') q: string) {
     return this.auth.searchUsers(req.user.id, q);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Patch('profile')
+  updateProfile(@Req() req: any, @Body() dto: { name?: string; city?: string; avatar?: string }) {
+    return this.auth.updateProfile(req.user.id, dto);
   }
 }
