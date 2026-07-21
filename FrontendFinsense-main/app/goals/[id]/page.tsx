@@ -78,8 +78,12 @@ export default function GoalDetailPage({ params }: GoalDetailPageProps) {
  if (!goal) return;
 
  const amount = parseFloat(depositAmount);
- if (!amount || amount <= 0) {
+ if (isNaN(amount) || amount === 0) {
  addToast({ message: 'Ingresa un monto válido', type: 'warning' });
+ return;
+ }
+ if (amount < 0 && goal.currentAmount + amount < 0) {
+ addToast({ message: 'No puedes retirar más de lo que has ahorrado', type: 'warning' });
  return;
  }
 
@@ -88,7 +92,8 @@ export default function GoalDetailPage({ params }: GoalDetailPageProps) {
  const updatedGoal = await updateProgress(goalId, amount);
  setGoal(updatedGoal);
  setDepositAmount('');
- addToast({ message: `¡Abono de ${formatCurrency(amount)} registrado! 💰 +50 XP`, type: 'success' });
+ const isWithdrawal = amount < 0;
+ addToast({ message: isWithdrawal ? `Has retirado ${formatCurrency(Math.abs(amount))} de tu meta.` : `¡Abono de ${formatCurrency(amount)} registrado! 💰 +50 XP`, type: 'success' });
  } catch {
  addToast({ message: 'Error al registrar abono', type: 'error' });
  } finally {
