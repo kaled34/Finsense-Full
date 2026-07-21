@@ -111,9 +111,7 @@ export class TransactionsService {
     const now = new Date();
     const todayStr = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
     
-    if (txDateStr && txDateStr < todayStr) {
-      throw new BadRequestException('Solo puedes registrar transacciones de la fecha actual en adelante.');
-    }
+
 
     const transaction = await this.prisma.transaction.create({
       data: {
@@ -195,14 +193,7 @@ export class TransactionsService {
   async update(userId: string, id: string, dto: UpdateTransactionDto) {
     await this.findOne(userId, id);
 
-    if (dto.date) {
-      const txDateStr = dto.date.split('T')[0];
-      const now = new Date();
-      const todayStr = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
-      if (txDateStr < todayStr) {
-        throw new BadRequestException('Solo puedes registrar transacciones de la fecha actual en adelante.');
-      }
-    }
+
 
     // Resolve slug → UUID if categoryId was provided
     const resolvedCategoryId = dto.categoryId
