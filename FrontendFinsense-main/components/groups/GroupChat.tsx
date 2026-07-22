@@ -45,20 +45,19 @@ export default function GroupChat({ groupId }: { groupId: string }) {
     setSocket(newSocket);
 
     newSocket.on('connect', () => {
-      newSocket.emit('joinGroup', { groupId });
+      newSocket.emit('joinRoom', `group_${groupId}`);
     });
 
     newSocket.on('newMessage', (msg: Message) => {
-      setMessages(prev => [...prev, msg]);
-      
-      // Notificar si no es mío
-      if (msg.senderId !== user?.id) {
-        addToast({ message: `Nuevo mensaje de ${msg.sender.name}`, type: 'success' });
-      }
+      setMessages(prev => {
+        // Prevent duplicate messages if already appended
+        if (prev.some(m => m.id === msg.id)) return prev;
+        return [...prev, msg];
+      });
     });
 
     return () => {
-      newSocket.emit('leaveGroup', { groupId });
+      newSocket.emit('leaveRoom', `group_${groupId}`);
       newSocket.disconnect();
     };
   }, [groupId, user?.id, addToast]);
