@@ -7,6 +7,7 @@ interface Toast {
   message: string;
   type: 'success' | 'error' | 'warning' | 'info';
   duration?: number;
+  onClick?: () => void;
 }
 
 interface UIState {

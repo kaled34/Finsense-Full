@@ -41,10 +41,11 @@ interface ToastItemProps {
  message: string;
  type: 'success' | 'error' | 'warning' | 'info';
  duration?: number;
+ onClick?: () => void;
 }
 
 const ToastItem = forwardRef<HTMLDivElement, ToastItemProps>(
- ({ id, message, type, duration = 4000 }, ref) => {
+ ({ id, message, type, duration = 4000, onClick }, ref) => {
  const removeToast = useUIStore((s) => s.removeToast);
  const [progress, setProgress] = useState(100);
  const colors = colorMap[type];
@@ -76,10 +77,17 @@ const ToastItem = forwardRef<HTMLDivElement, ToastItemProps>(
  className={cn(
  'relative w-80 rounded-2xl overflow-hidden',
  colors.bg,
- 'shadow-blue-sm'
+ 'shadow-blue-sm',
+ onClick ? 'cursor-pointer hover:brightness-95 transition-all' : ''
  )}
  role="alert"
  aria-live="polite"
+ onClick={() => {
+   if (onClick) {
+     onClick();
+     removeToast(id);
+   }
+ }}
  >
  <div className="flex items-start gap-3 p-4">
  <Icon size={20} className={cn('flex-shrink-0 mt-0.5', colors.icon)} />
