@@ -160,11 +160,15 @@ export class AuthService {
     const users = await this.prisma.user.findMany({
       where: {
         id: { not: currentUserId },
-        name: { contains: query }
+        OR: [
+          { name: { contains: query } },
+          { email: { contains: query } }
+        ]
       },
       select: {
         id: true,
         name: true,
+        email: true,
         avatar: true,
         city: true,
         userXp: { select: { level: true, badges: true } }
