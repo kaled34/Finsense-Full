@@ -193,7 +193,7 @@ export class GroupsService {
         await this.prisma.notification.create({
           data: {
             userId: creditorId,
-            type: 'system',
+            type: 'reminder',
             title: 'Deuda Saldada',
             body: `${payer.name} ha saldado su deuda de $${dto.amount} en el grupo "${group.name}".`
           }
