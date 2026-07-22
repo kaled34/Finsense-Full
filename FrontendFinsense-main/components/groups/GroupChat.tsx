@@ -29,7 +29,9 @@ export default function GroupChat({ groupId }: { groupId: string }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [socket, setSocket] = useState<Socket | null>(null);
+  const [typingUsers, setTypingUsers] = useState<Record<string, string>>({});
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // 1. Cargar historial inicial
   useEffect(() => {
@@ -53,6 +55,24 @@ export default function GroupChat({ groupId }: { groupId: string }) {
         // Prevent duplicate messages if already appended
         if (prev.some(m => m.id === msg.id)) return prev;
         return [...prev, msg];
+      });
+      // Si recibimos mensaje, dejamos de mostrar que está escribiendo
+      setTypingUsers(prev => {
+        const next = { ...prev };
+        delete next[msg.senderId];
+        return next;
+      });
+    });
+
+    newSocket.on('userTyping', (data: { userId: string; userName: string; isTyping: boolean }) => {
+      setTypingUsers(prev => {
+        const next = { ...prev };
+        if (data.isTyping) {
+          next[data.userId] = data.userName;
+        } else {
+          delete next[data.userId];
+        }
+        return next;
       });
     });
 
@@ -97,6 +117,7 @@ export default function GroupChat({ groupId }: { groupId: string }) {
       userId: user.id,
       content: newMsgContent
     });
+    socket.emit('typing', { groupId, userId: user.id, userName: user.name, isTyping: false });
     setInputValue('');
   };
 
@@ -180,6 +201,22 @@ export default function GroupChat({ groupId }: { groupId: string }) {
         <div ref={messagesEndRef} />
       </div>
 
+      {/* Typing Indicator */}
+      <AnimatePresence>
+        {Object.keys(typingUsers).length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            className="px-6 py-2 text-[11px] font-dm text-text-secondary/80 italic absolute bottom-[72px] left-0 z-20 bg-surface/50 backdrop-blur-sm rounded-tr-xl border-t border-r border-white/5"
+          >
+            {Object.keys(typingUsers).length === 1
+              ? `${Object.values(typingUsers)[0]} está escribiendo...`
+              : 'Varios están escribiendo...'}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Barra de Input Glassmorphism */}
       <div className="p-4 bg-surface/80 backdrop-blur-md border-t border-white/5 relative z-10">
         <div className="flex items-center gap-2 bg-surface border border-white/10 rounded-full p-1.5 focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary/50 transition-all shadow-inner">
@@ -189,7 +226,16 @@ export default function GroupChat({ groupId }: { groupId: string }) {
           <input
             type="text"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={(e) => {
+              setInputValue(e.target.value);
+              if (socket && user) {
+                socket.emit('typing', { groupId, userId: user.id, userName: user.name, isTyping: true });
+                if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+                typingTimeoutRef.current = setTimeout(() => {
+                  socket.emit('typing', { groupId, userId: user.id, userName: user.name, isTyping: false });
+                }, 2000);
+              }
+            }}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder="Escribe un mensaje..."
             className="flex-1 bg-transparent px-2 py-2 text-sm font-dm focus:outline-none text-text-primary placeholder:text-text-secondary/50"

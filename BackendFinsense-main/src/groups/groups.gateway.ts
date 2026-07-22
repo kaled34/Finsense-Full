@@ -85,6 +85,16 @@ export class GroupsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
   }
 
+  @SubscribeMessage('typing')
+  handleTyping(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() data: { groupId: string; userId: string; userName: string; isTyping: boolean }
+  ) {
+    const room = `group_${data.groupId}`;
+    // Reenviar a todos en la sala excepto al que envía
+    client.broadcast.to(room).emit('userTyping', data);
+  }
+
   @SubscribeMessage('joinUserRoom')
   handleJoinUserRoom(client: Socket, userId: string) {
     if (userId) {
