@@ -1,10 +1,15 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import { Injectable, NotFoundException, ForbiddenException, Inject, forwardRef } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateGroupDto, AddExpenseDto } from './groups.dto';
+import { GroupsGateway } from './groups.gateway';
 
 @Injectable()
 export class GroupsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    @Inject(forwardRef(() => GroupsGateway))
+    private gateway: GroupsGateway
+  ) {}
 
   async findAll(userId: string) {
     const groups = await this.prisma.group.findMany({
@@ -175,6 +180,41 @@ export class GroupsService {
         date: new Date(),
       },
     });
+
+    // Enviar notificación si es una liquidación
+    if (dto.description.startsWith('Liquidación de deuda')) {
+      // El acreedor es el que está en splitBetween[0]
+      const creditorId = dto.splitBetween[0];
+      const payer = await this.prisma.user.findUnique({ where: { id: payerId } });
+      const group = await this.prisma.group.findUnique({ where: { id: groupId } });
+      
+      if (creditorId && payer && group && creditorId !== payerId) {
+        // Crear notificación en base de datos
+        await this.prisma.notification.create({
+          data: {
+            userId: creditorId,
+            type: 'system',
+            title: 'Deuda Saldada',
+            body: `${payer.name} ha saldado su deuda de $${dto.amount} en el grupo "${group.name}".`
+          }
+        });
+        
+        // Emitir evento en tiempo real
+        if (this.gateway) {
+          try {
+            this.gateway.emitGlobalNotification(creditorId, 'debt_settled', {
+              groupId,
+              groupName: group.name,
+              payerName: payer.name,
+              amount: dto.amount
+            });
+          } catch (e) {
+            console.error('Error emitting debt_settled', e);
+          }
+        }
+      }
+    }
+
     return expense;
   }
 

@@ -47,11 +47,56 @@ export function formatDate(dateString: string, pattern = 'd MMM yyyy'): string {
   }
 }
 
-export function formatRelativeDate(dateString: string): string {
+export function formatRelativeDate(isoString: string): string {
+  if (!isoString) return '';
+  return formatDistanceToNow(new Date(isoString), { addSuffix: true, locale: es });
+}
+
+export function playNotificationSound() {
   try {
-    return formatDistanceToNow(parseISO(dateString), { addSuffix: true, locale: es });
-  } catch {
-    return dateString;
+    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContextClass) return;
+    
+    const audioCtx = new AudioContextClass();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    // Configurar tono tipo "timbre" sutil (doble bip)
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(880, audioCtx.currentTime); // Nota A5
+    oscillator.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.1);
+    
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.05);
+    gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.2);
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.2);
+    
+    // Segundo bip
+    setTimeout(() => {
+      if (audioCtx.state === 'closed') return;
+      const osc2 = audioCtx.createOscillator();
+      const gain2 = audioCtx.createGain();
+      
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(1046.50, audioCtx.currentTime); // Nota C6
+      osc2.frequency.exponentialRampToValueAtTime(523.25, audioCtx.currentTime + 0.1);
+      
+      gain2.gain.setValueAtTime(0, audioCtx.currentTime);
+      gain2.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.05);
+      gain2.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.2);
+      
+      osc2.connect(gain2);
+      gain2.connect(audioCtx.destination);
+      osc2.start();
+      osc2.stop(audioCtx.currentTime + 0.2);
+    }, 150);
+  } catch (e) {
+    console.error('Audio play failed', e);
   }
 }
 

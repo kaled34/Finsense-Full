@@ -7,6 +7,7 @@ import { AppGuide } from '@/components/ui/AppGuide';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { FloatingActionButton } from '@/components/ui/FloatingActionButton';
 import { GlobalBottomSheet } from '@/components/ui/GlobalBottomSheet';
+import { GlobalSocketProvider } from '@/components/GlobalSocketProvider';
 
 const outfit = Outfit({
  subsets: ['latin'],
@@ -83,13 +84,6 @@ export default function RootLayout({
  <head>
  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
  <meta name="mobile-web-app-capable" content="yes" />
- <script dangerouslySetInnerHTML={{ __html: `
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js');
-      });
-    }
-  ` }} />
  </head>
  <body className="font-dm bg-surface text-text-primary antialiased">
  <ThemeProvider>
@@ -97,6 +91,7 @@ export default function RootLayout({
  {children}
  </div>
  <ToastContainer />
+ <GlobalSocketProvider />
  <FinancialAdvisorBot />
  <FloatingActionButton />
  <AppGuide />
