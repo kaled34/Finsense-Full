@@ -496,19 +496,47 @@ export default function DashboardPage() {
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 relative z-10 min-w-0">
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-12 h-12 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center text-orange-500">
-                  <Flame size={24} fill="currentColor" className="text-orange-500 animate-bounce" />
-                </div>
-                <div>
-                  <h3 className="font-syne font-bold text-sm sm:text-base text-text-primary">Racha de Registro Diario</h3>
-                  <p className="font-dm text-xs text-text-secondary mt-0.5">
-                    Llevas <span className="font-bold text-orange-500 font-mono text-sm">{gamiProfile?.streakDays ?? user?.streakDays ?? 0} días</span> seguidos. ¡Sigue quemando!
-                  </p>
-                </div>
+                {(() => {
+                  const currentStreak = gamiProfile?.streakDays ?? user?.streakDays ?? 0;
+                  const isAlive = currentStreak > 0;
+                  return (
+                    <>
+                      <div className={cn(
+                        "w-12 h-12 rounded-2xl border flex items-center justify-center transition-colors",
+                        isAlive
+                          ? "bg-orange-50 border-orange-100 text-orange-500"
+                          : "bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400"
+                      )}>
+                        <Flame size={24} fill={isAlive ? "currentColor" : "none"} className={isAlive ? "text-orange-500 animate-bounce" : "text-slate-400"} />
+                      </div>
+                      <div>
+                        <h3 className="font-syne font-bold text-sm sm:text-base text-text-primary">Racha de Registro Diario</h3>
+                        <p className="font-dm text-xs text-text-secondary mt-0.5">
+                          {isAlive ? (
+                            <>Llevas <span className="font-bold text-orange-500 font-mono text-sm">{currentStreak} días</span> seguidos. ¡Sigue quemando!</>
+                          ) : (
+                            <>Tu racha está <span className="font-bold text-slate-500 dark:text-slate-400 font-mono text-sm">muerta (0 días)</span>. ¡Registra una transacción para revivirla!</>
+                          )}
+                        </p>
+                      </div>
+                    </>
+                  );
+                })()}
               </div>
-              <span className="self-start sm:self-auto font-mono text-[10px] font-bold text-orange-500 bg-orange-50 border border-orange-200/60 px-2.5 py-1 rounded-full uppercase tracking-wide">
-                Racha Activa
-              </span>
+              {(() => {
+                const currentStreak = gamiProfile?.streakDays ?? user?.streakDays ?? 0;
+                const isAlive = currentStreak > 0;
+                return (
+                  <span className={cn(
+                    "self-start sm:self-auto font-mono text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wide border",
+                    isAlive
+                      ? "text-orange-500 bg-orange-50 border-orange-200/60"
+                      : "text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700"
+                  )}>
+                    {isAlive ? "Racha Activa" : "Racha Muerta"}
+                  </span>
+                );
+              })()}
             </div>
 
             {/* Week Progress Circles */}

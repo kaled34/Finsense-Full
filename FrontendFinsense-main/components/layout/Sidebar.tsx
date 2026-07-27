@@ -129,10 +129,16 @@ export function Sidebar() {
         <div className="px-4 mb-4 mt-auto">
           <div className="bg-gradient-to-br from-primary/10 dark:from-accent/10 to-accent/10 border border-primary/20 dark:border-accent/20 rounded-2xl p-4 text-center shadow-sm">
             <div className="w-10 h-10 mx-auto bg-primary/20 dark:bg-accent/20 rounded-full flex items-center justify-center mb-2">
-              <Flame size={20} className="text-primary dark:text-accent" />
+              <Flame size={20} className={user.streakDays > 0 ? "text-primary dark:text-accent" : "text-gray-400"} />
             </div>
-            <h4 className="font-syne font-bold text-text-primary text-sm mb-1">¡Mantén tu racha!</h4>
-            <p className="font-dm text-xs text-text-secondary mb-3">Registra gastos para no perder tu progreso de {user.streakDays} días.</p>
+            <h4 className="font-syne font-bold text-text-primary text-sm mb-1">
+              {user.streakDays > 0 ? "¡Mantén tu racha!" : "¡Racha muerta!"}
+            </h4>
+            <p className="font-dm text-xs text-text-secondary mb-3">
+              {user.streakDays > 0
+                ? `Registra gastos para no perder tu progreso de ${user.streakDays} días.`
+                : "Registra una transacción hoy para iniciar tu racha."}
+            </p>
             <Link
               href="/transactions/new"
               className="block w-full py-2 bg-primary dark:bg-accent text-white dark:text-slate-900 text-xs font-bold rounded-xl hover:bg-primary-dark dark:hover:bg-accent/90 transition-colors shadow-blue-sm dark:shadow-[0_4px_20px_rgba(0,194,255,0.30)]"

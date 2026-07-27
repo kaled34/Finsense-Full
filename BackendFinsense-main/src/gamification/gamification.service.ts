@@ -29,9 +29,68 @@ export class GamificationService {
       }
     }
     
+    // Calculate exact streak based on all registered transactions (income and expense)
+    const allUserTxs = await this.prisma.transaction.findMany({
+      where: { userId },
+      select: { date: true, type: true },
+      orderBy: { date: 'desc' }
+    });
+
+    const txDates = new Set<string>();
+    allUserTxs.forEach((tx) => {
+      const dateStr = new Date(tx.date).toISOString().split('T')[0];
+      txDates.add(dateStr);
+    });
+
+    const now = new Date();
+    const todayStr = now.toISOString().split('T')[0];
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+    let computedStreak = 0;
+    if (txDates.size > 0) {
+      let checkDate: Date | null = null;
+      if (txDates.has(todayStr)) {
+        checkDate = new Date(now);
+      } else if (txDates.has(yesterdayStr)) {
+        checkDate = yesterday;
+      }
+
+      if (checkDate) {
+        while (true) {
+          const dateStr = checkDate.toISOString().split('T')[0];
+          if (txDates.has(dateStr)) {
+            computedStreak++;
+            checkDate.setDate(checkDate.getDate() - 1);
+          } else {
+            break;
+          }
+        }
+      }
+    }
+
     let streak = await this.prisma.streak.findUnique({ where: { userId } });
+    const newLongest = Math.max(streak?.longestStreak || 0, computedStreak);
+
     if (!streak) {
-      streak = await this.prisma.streak.create({ data: { userId } });
+      streak = await this.prisma.streak.create({
+        data: {
+          userId,
+          currentStreak: computedStreak,
+          longestStreak: newLongest,
+          lastEntryDate: allUserTxs[0]?.date || null
+        }
+      });
+    } else {
+      streak = await this.prisma.streak.update({
+        where: { userId },
+        data: {
+          currentStreak: computedStreak,
+          longestStreak: newLongest,
+          lastEntryDate: allUserTxs[0]?.date || streak.lastEntryDate
+        }
+      });
     }
 
     return {

@@ -15,7 +15,7 @@ export const MOCK_USER: User = {
   level: 4,
   xp: 780,
   xpToNextLevel: 1000,
-  streakDays: 7,
+  streakDays: 0,
   maxStreak: 14,
   monthsActive: 3,
   goalsCompleted: 2,
