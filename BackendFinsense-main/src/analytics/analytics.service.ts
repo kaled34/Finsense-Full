@@ -21,18 +21,18 @@ export class AnalyticsService {
 
   async getSummary(userId: string, period?: string) {
     const now = new Date();
-    let start: Date, end: Date;
+    let start: Date;
+    const end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
 
     if (period === 'week') {
-      start = new Date(now); start.setDate(now.getDate() - 7); end = now;
+      start = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7, 0, 0, 0);
     } else if (period === 'quarter') {
-      start = new Date(now); start.setMonth(now.getMonth() - 3); end = now;
+      start = new Date(now.getFullYear(), now.getMonth() - 3, 1, 0, 0, 0);
     } else if (period === 'year') {
-      start = new Date(now.getFullYear(), 0, 1); end = now;
+      start = new Date(now.getFullYear(), 0, 1, 0, 0, 0);
     } else {
       // month (default)
-      start = new Date(now.getFullYear(), now.getMonth(), 1);
-      end = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
+      start = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0);
     }
 
     const transactions = await this.prisma.transaction.findMany({
