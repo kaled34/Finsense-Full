@@ -1,0 +1,211 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1785358285094,1001,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,1833,339,4,4,https://finsense-backend-ypwx.onrender.com/api/auth/login,1001,0,195
+1785358286094,736,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,1833,339,4,4,https://finsense-backend-ypwx.onrender.com/api/auth/login,735,0,258
+1785358287095,755,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,1833,339,5,5,https://finsense-backend-ypwx.onrender.com/api/auth/login,755,0,224
+1785358288146,1015,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,2398,466,7,7,https://finsense-backend-ypwx.onrender.com/api/auth/me,1015,0,0
+1785358288088,1137,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,1833,339,7,7,https://finsense-backend-ypwx.onrender.com/api/auth/login,1136,0,288
+1785358288834,801,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,2398,466,7,7,https://finsense-backend-ypwx.onrender.com/api/auth/me,800,0,0
+1785358289082,757,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,1833,339,7,7,https://finsense-backend-ypwx.onrender.com/api/auth/login,757,0,209
+1785358289854,423,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,2398,466,8,8,https://finsense-backend-ypwx.onrender.com/api/auth/me,422,0,0
+1785358290092,640,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,1833,339,8,8,https://finsense-backend-ypwx.onrender.com/api/auth/login,640,0,205
+1785358291165,741,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,24935,471,9,9,https://finsense-backend-ypwx.onrender.com/api/transactions,554,0,0
+1785358291229,677,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,2398,466,9,9,https://finsense-backend-ypwx.onrender.com/api/auth/me,677,0,0
+1785358291097,1186,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,1833,339,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,1185,0,206
+1785358291639,905,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,24935,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,540,0,0
+1785358291843,782,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,782,0,0
+1785358292281,425,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,24935,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,344,0,0
+1785358292081,941,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,1833,339,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,941,0,228
+1785358292737,515,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,515,0,0
+1785358293085,655,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,1833,339,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,655,0,203
+1785358293915,779,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,24935,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,731,0,0
+1785358294304,517,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,516,0,0
+1785358294095,726,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,1833,339,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,726,0,157
+1785358294629,418,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,24996,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,371,0,0
+1785358293915,1357,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,1357,0,0
+1785358295030,442,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,442,0,0
+1785358294551,1342,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,1342,0,0
+1785358295256,671,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,25057,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,558,0,0
+1785358295748,412,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,412,0,0
+1785358294709,1771,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,1771,0,0
+1785358296838,441,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,441,0,0
+1785358296838,457,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,25315,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,342,0,0
+1785358296708,901,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,901,0,0
+1785358297279,650,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,650,0,0
+1785358297051,911,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,910,0,0
+1785358297482,624,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,25382,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,495,0,0
+1785358297897,565,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,565,0,0
+1785358297929,884,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,884,0,0
+1785358298493,399,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,399,0,0
+1785358298177,876,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,25382,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,380,0,0
+1785358299292,598,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,25416,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,343,0,0
+1785358299618,416,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,416,0,0
+1785358299308,902,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,902,0,0
+1785358299937,427,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,426,0,0
+1785358299969,482,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,482,0,0
+1785358300466,387,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,387,0,0
+1785358300113,916,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,916,0,0
+1785358300820,400,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,400,0,0
+1785358300900,333,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,333,0,0
+1785358301059,886,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,885,0,0
+1785358302038,292,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,292,0,0
+1785358302216,570,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,570,0,0
+1785358302465,353,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,353,0,0
+1785358301896,954,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,1714,620,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,954,0,0
+1785358302386,544,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,2537,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,496,0,0
+1785358302866,337,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,2537,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,337,0,0
+1785358303042,443,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,443,0,0
+1785358303227,275,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,274,0,0
+1785358303244,482,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,2537,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,482,0,0
+1785358303952,520,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,519,0,0
+1785358304340,442,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,2537,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,441,0,0
+1785358304797,259,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,259,0,0
+1785358304863,422,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,422,0,0
+1785358304830,534,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,2537,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,534,0,0
+1785358304943,769,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,769,0,0
+1785358305487,435,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,434,0,0
+1785358305504,417,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,2537,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,417,0,0
+1785358305216,818,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,818,0,0
+1785358305729,704,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,704,0,0
+1785358306481,272,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,272,0,0
+1785358306785,476,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,476,0,0
+1785358307059,340,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,2537,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,340,0,0
+1785358307287,297,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,296,0,0
+1785358307366,472,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,472,0,0
+1785358307727,416,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,416,0,0
+1785358307933,419,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,2537,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,419,0,0
+1785358308046,422,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,422,0,0
+1785358307933,583,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,583,0,0
+1785358308436,400,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,400,0,0
+1785358308755,368,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,2537,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,368,0,0
+1785358309275,419,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,419,0,0
+1785358309403,532,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,532,0,0
+1785358309598,433,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,2537,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,433,0,0
+1785358309854,682,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,681,0,0
+1785358310471,513,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,25553,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,402,0,0
+1785358310368,650,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,649,0,0
+1785358310158,908,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,25553,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,459,0,0
+1785358310519,562,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,562,0,0
+1785358310840,464,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,25553,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,401,0,0
+1785358311130,509,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,509,0,0
+1785358311702,446,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,25553,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,382,0,0
+1785358311940,606,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,606,0,0
+1785358312036,510,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,510,0,0
+1785358312546,416,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,25553,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,336,0,0
+1785358313025,512,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,512,0,0
+1785358313089,734,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,25553,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,703,0,0
+1785358312993,972,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,972,0,0
+1785358313320,882,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,882,0,0
+1785358313072,1221,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,1220,0,0
+1785358313648,706,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,706,0,0
+1785358314552,415,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,415,0,0
+1785358314552,703,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,25956,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,495,0,0
+1785358314153,1126,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,1126,0,0
+1785358314967,956,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,956,0,0
+1785358315550,454,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,25989,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,341,0,0
+1785358315971,650,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,649,0,0
+1785358316301,400,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,400,0,0
+1785358315825,892,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,892,0,0
+1785358316213,584,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,584,0,0
+1785358316357,457,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,26050,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,408,0,0
+1785358316975,496,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,26050,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,406,0,0
+1785358317282,641,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,641,0,0
+1785358317266,917,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,917,0,0
+1785358317939,441,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,441,0,0
+1785358318630,309,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,309,0,0
+1785358318711,293,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,293,0,0
+1785358318020,1032,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,1032,0,0
+1785358318808,277,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,277,0,0
+1785358318727,472,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,471,0,0
+1785358318826,893,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,893,0,0
+1785358319928,307,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,307,0,0
+1785358319484,915,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,1714,620,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,915,0,0
+1785358320187,414,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,414,0,0
+1785358320382,284,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,284,0,0
+1785358320941,341,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,2539,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,341,0,0
+1785358321201,261,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,261,0,0
+1785358321006,490,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,2539,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,489,0,0
+1785358321055,440,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,440,0,0
+1785358321088,479,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,2539,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,479,0,0
+1785358321721,404,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,404,0,0
+1785358322238,467,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,2539,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,467,0,0
+1785358322409,440,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,440,0,0
+1785358322608,388,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,387,0,0
+1785358322672,340,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,2539,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,339,0,0
+1785358323504,369,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,369,0,0
+1785358323473,449,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,2539,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,449,0,0
+1785358323285,796,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,796,0,0
+1785358324129,326,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,326,0,0
+1785358323504,1146,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,1146,0,0
+1785358323580,1151,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,1151,0,0
+1785358324859,404,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,404,0,0
+1785358324714,629,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,628,0,0
+1785358325003,462,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,2539,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,462,0,0
+1785358325018,718,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,718,0,0
+1785358325878,341,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,2539,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,341,0,0
+1785358325925,590,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,589,0,0
+1785358326087,503,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,503,0,0
+1785358326466,333,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,2539,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,333,0,0
+1785358326654,401,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,400,0,0
+1785358326733,452,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,452,0,0
+1785358327264,342,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,2539,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,341,0,0
+1785358327345,583,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,583,0,0
+1785358327467,461,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,461,0,0
+1785358327751,450,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,449,0,0
+1785358328232,860,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,860,0,0
+1785358328521,668,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,668,0,0
+1785358328801,667,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,667,0,0
+1785358328604,911,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,26165,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,519,0,0
+1785358329059,839,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,26165,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,510,0,0
+1785358329188,710,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,26165,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,381,0,0
+1785358329611,448,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,1833,561,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,448,0,0
+1785358329931,415,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,415,0,0
+1785358329931,463,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,26165,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,368,0,0
+1785358330204,668,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,26165,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,349,0,0
+1785358331098,405,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,405,0,0
+1785358331193,449,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,26165,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,344,0,0
+1785358331469,449,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,449,0,0
+1785358332060,415,GET /api/auth/me,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,2398,466,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,415,0,0
+1785358331517,1081,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,1081,0,0
+1785358332350,537,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,26165,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,329,0,0
+1785358331900,987,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,987,0,0
+1785358331900,1228,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,1228,0,0
+1785358332400,970,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,970,0,0
+1785358332887,886,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,886,0,0
+1785358333506,573,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,26165,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,446,0,0
+1785358333919,587,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,26165,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,369,0,0
+1785358333659,896,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,895,0,0
+1785358334489,510,GET /api/transactions,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,26165,471,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,365,0,0
+1785358334611,470,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,470,0,0
+1785358334902,408,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,408,0,0
+1785358335131,408,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,408,0,0
+1785358334902,892,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,892,0,0
+1785358335375,436,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,436,0,0
+1785358335777,422,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,421,0,0
+1785358336557,414,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,414,0,0
+1785358336085,886,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,886,0,0
+1785358337084,271,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,271,0,0
+1785358336508,896,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,1713,619,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,896,0,0
+1785358337323,276,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,276,0,0
+1785358337551,324,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,291,0,0
+1785358337003,872,POST /api/transactions (crear gasto),201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,1714,620,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,872,0,0
+1785358337826,291,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,291,0,0
+1785358337809,421,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,420,0,0
+1785358338213,368,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,367,0,0
+1785358338978,257,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,2022,464,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,257,0,0
+1785358338978,434,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,1363,466,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,434,0,0
+1785358339363,427,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,true,,2538,476,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,427,0,0
+1785358339412,442,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,1363,466,9,9,https://finsense-backend-ypwx.onrender.com/api/budgets,441,0,0
+1785358339611,484,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,true,,2538,476,9,9,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,484,0,0
+1785358339885,402,GET /api/budgets,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,1363,466,8,8,https://finsense-backend-ypwx.onrender.com/api/budgets,401,0,0
+1785358339885,418,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,true,,2538,476,8,8,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,418,0,0
+1785358340125,369,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,true,,2538,476,7,7,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,369,0,0
+1785358340238,276,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,2022,464,6,6,https://finsense-backend-ypwx.onrender.com/api/goals,276,0,0
+1785358340594,429,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,true,,2538,476,6,6,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,429,0,0
+1785358341248,404,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,true,,2538,476,5,5,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,404,0,0
+1785358341425,283,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,2022,464,4,4,https://finsense-backend-ypwx.onrender.com/api/goals,283,0,0
+1785358341869,291,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,2022,464,4,4,https://finsense-backend-ypwx.onrender.com/api/goals,291,0,0
+1785358342289,261,GET /api/goals,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,2022,464,4,4,https://finsense-backend-ypwx.onrender.com/api/goals,261,0,0
+1785358342518,391,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,true,,2538,476,4,4,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,391,0,0
+1785358343722,422,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,true,,2538,476,3,3,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,421,0,0
+1785358344174,357,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,true,,2538,476,2,2,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,357,0,0
+1785358344554,346,GET /api/analytics/summary,200,OK,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,true,,2538,476,1,1,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,346,0,0

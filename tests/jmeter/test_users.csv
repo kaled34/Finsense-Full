@@ -1,0 +1,14 @@
+# Datos de prueba para JMeter - Finsense Load Test
+# Formato: email,password,name
+# Este archivo se puede usar con CSV Data Set Config en JMeter
+email,password,name
+usuario1@prueba.com,password123,Usuario Prueba 1
+usuario2@prueba.com,password123,Usuario Prueba 2
+usuario3@prueba.com,password123,Usuario Prueba 3
+usuario4@prueba.com,password123,Usuario Prueba 4
+usuario5@prueba.com,password123,Usuario Prueba 5
+usuario6@prueba.com,password123,Usuario Prueba 6
+usuario7@prueba.com,password123,Usuario Prueba 7
+usuario8@prueba.com,password123,Usuario Prueba 8
+usuario9@prueba.com,password123,Usuario Prueba 9
+usuario10@prueba.com,password123,Usuario Prueba 10

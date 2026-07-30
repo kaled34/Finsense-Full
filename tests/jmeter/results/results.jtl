@@ -1,0 +1,380 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1785351108924,55272,[SETUP] POST /api/auth/register,201,Created,Setup - Registro de usuario de prueba 1-1,text,true,,1770,327,1,1,https://finsense-backend-ypwx.onrender.com/api/auth/register,55237,0,1098
+1785351166304,3922,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,false,Test failed: text expected to contain /access_token/,1802,293,6,6,https://finsense-backend-ypwx.onrender.com/api/auth/login,3922,0,2835
+1785351167301,3009,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,false,Test failed: text expected to contain /access_token/,1802,293,7,7,https://finsense-backend-ypwx.onrender.com/api/auth/login,3009,0,1838
+1785351168300,3006,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,false,Test failed: text expected to contain /access_token/,1802,293,8,8,https://finsense-backend-ypwx.onrender.com/api/auth/login,2574,0,1657
+1785351169302,2426,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,false,Test failed: text expected to contain /access_token/,1802,293,8,8,https://finsense-backend-ypwx.onrender.com/api/auth/login,1988,0,901
+1785351170304,2512,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,false,Test failed: text expected to contain /access_token/,1802,293,9,9,https://finsense-backend-ypwx.onrender.com/api/auth/login,1991,0,1161
+1785351172273,580,GET /api/auth/me,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,9,9,https://finsense-backend-ypwx.onrender.com/api/auth/me,580,0,0
+1785351172319,1342,GET /api/auth/me,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,590,0,0
+1785351171305,2888,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,false,Test failed: text expected to contain /access_token/,1802,293,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,2888,0,1251
+1785351173308,1471,GET /api/auth/me,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,701,0,0
+1785351173730,1148,GET /api/auth/me,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,740,0,0
+1785351174818,420,GET /api/auth/me,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,420,0,0
+1785351172320,2918,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,false,Test failed: text expected to contain /access_token/,1802,293,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,2559,0,1817
+1785351174856,634,GET /api/transactions,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,243,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,418,0,0
+1785351173308,2512,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,false,Test failed: text expected to contain /access_token/,1802,293,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,2512,0,1603
+1785351175675,451,GET /api/transactions,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,243,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,274,0,0
+1785351174314,1813,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,false,Test failed: text expected to contain /access_token/,1802,293,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,1813,0,926
+1785351175305,1166,POST /api/auth/login,201,Created,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,false,Test failed: text expected to contain /access_token/,1802,293,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/login,1166,0,623
+1785351176201,513,GET /api/auth/me,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,255,0,0
+1785351176789,230,GET /api/transactions,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,243,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,229,0,0
+1785351176882,342,GET /api/transactions,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,243,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,163,0,0
+1785351177252,224,GET /api/auth/me,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,224,0,0
+1785351177252,279,GET /api/transactions,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,243,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,279,0,0
+1785351177499,394,POST /api/transactions (crear gasto),401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	Test failed: code expected something using /
+
+****** received  : [[[4]]]01
+
+****** comparison: [[[2]]]01
+
+/	",1168,386,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,394,0,0
+1785351177825,798,GET /api/auth/me,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,498,0,0
+1785351178135,528,POST /api/transactions (crear gasto),401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	Test failed: code expected something using /
+
+****** received  : [[[4]]]01
+
+****** comparison: [[[2]]]01
+
+/	",1168,386,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,359,0,0
+1785351178135,536,GET /api/auth/me,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,389,0,0
+1785351178476,330,GET /api/auth/me,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/auth/me,174,0,0
+1785351178722,375,GET /api/transactions,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,243,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,197,0,0
+1785351179033,156,POST /api/transactions (crear gasto),401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	Test failed: code expected something using /
+
+****** received  : [[[4]]]01
+
+****** comparison: [[[2]]]01
+
+/	",1168,386,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,156,0,0
+1785351179234,325,POST /api/transactions (crear gasto),401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	Test failed: code expected something using /
+
+****** received  : [[[4]]]01
+
+****** comparison: [[[2]]]01
+
+/	",1168,386,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,151,0,0
+1785351179542,140,POST /api/transactions (crear gasto),401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	Test failed: code expected something using /
+
+****** received  : [[[4]]]01
+
+****** comparison: [[[2]]]01
+
+/	",1168,386,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,140,0,0
+1785351179480,363,GET /api/transactions,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,243,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,156,0,0
+1785351179894,690,GET /api/budgets,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,254,0,0
+1785351180679,393,GET /api/budgets,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,393,0,0
+1785351180633,570,GET /api/transactions,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,243,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,141,0,0
+1785351180679,805,GET /api/transactions,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,243,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,393,0,0
+1785351181100,388,POST /api/transactions (crear gasto),401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	Test failed: code expected something using /
+
+****** received  : [[[4]]]01
+
+****** comparison: [[[2]]]01
+
+/	",1168,386,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,388,0,0
+1785351181192,572,GET /api/budgets,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,572,0,0
+1785351180819,1044,GET /api/transactions,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,243,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,431,0,0
+1785351181689,614,GET /api/budgets,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,614,0,0
+1785351181565,1009,GET /api/budgets,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,700,0,0
+1785351181845,856,POST /api/transactions (crear gasto),401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	Test failed: code expected something using /
+
+****** received  : [[[4]]]01
+
+****** comparison: [[[2]]]01
+
+/	",1168,386,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,532,0,0
+1785351182603,242,GET /api/goals,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,236,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,241,0,0
+1785351183079,343,GET /api/goals,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,236,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,139,0,0
+1785351183216,333,POST /api/transactions (crear gasto),401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-8,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	Test failed: code expected something using /
+
+****** received  : [[[4]]]01
+
+****** comparison: [[[2]]]01
+
+/	",1168,386,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,177,0,0
+1785351183493,391,GET /api/budgets,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-6,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,195,0,0
+1785351183493,391,POST /api/transactions (crear gasto),401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-9,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	Test failed: code expected something using /
+
+****** received  : [[[4]]]01
+
+****** comparison: [[[2]]]01
+
+/	",1168,386,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,195,0,0
+1785351183770,255,GET /api/goals,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-3,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,236,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,255,0,0
+1785351183878,746,POST /api/transactions (crear gasto),401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-10,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	Test failed: code expected something using /
+
+****** received  : [[[4]]]01
+
+****** comparison: [[[2]]]01
+
+/	",1168,387,10,10,https://finsense-backend-ypwx.onrender.com/api/transactions,272,0,0
+1785351184577,590,GET /api/goals,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-4,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,236,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,590,0,0
+1785351184313,1061,GET /api/goals,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-5,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,236,10,10,https://finsense-backend-ypwx.onrender.com/api/goals,497,0,0
+1785351184855,542,GET /api/analytics/summary,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-1,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,248,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,542,0,0
+1785351184716,945,GET /api/budgets,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-7,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,238,10,10,https://finsense-backend-ypwx.onrender.com/api/budgets,591,0,0
+1785351185428,327,GET /api/analytics/summary,401,Unauthorized,Carga - Flujo completo de usuario (10 usuarios) 1-2,text,false,"Test failed: code expected something using /
+
+****** received  : [[[401]]]
+
+****** comparison: [[[200]]]
+
+/	",1168,248,10,10,https://finsense-backend-ypwx.onrender.com/api/analytics/summary,327,0,0
