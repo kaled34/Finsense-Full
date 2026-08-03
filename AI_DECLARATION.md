@@ -2,8 +2,7 @@
 
 ## Proposito de este Documento
 
-Se ha creado para declarar el uso de la inteligencia artificial en el proyecto integrador de finsense
-
+Se ha creado para declarar el uso de la inteligencia artificial  durante el desarrolo del proyecto integrador de finsense, indicando el alcance en cuanto a su utilización y las herramientas utilizadas, tanto para el backend como para el frontend, asi como para las pruebas. Tambien se incluye una breve descripcion de los modulos desarrollados y los que fueron generados o asistidos por IA.
 ## Herramientas de IA Utilizadas
 
 | Herramienta | Proveedor | Tipo de uso |
