@@ -1,79 +1,67 @@
-#  Delaración de Uso de Inteligencia Artificial
+# Declaracion de Uso de Inteligencia Artificial
+
+## Proposito de este Documento
+
+Se ha creado para declarar el uso de la inteligencia artificial en el proyecto integrador de finsense
 
 ## Herramientas de IA Utilizadas
 
 | Herramienta | Proveedor | Tipo de uso |
-|-------------|-----------|-------------|
-| **GitHub Copilot** | Microsoft / OpenAI | Autocompletado de código en tiempo real (inline suggestions) |
-| **ChatGPT (GPT-4o)** | OpenAI | Consultas puntuales de diseño, resolución de errores y revisión de patrones |
-| **Google Gemini** | Google DeepMind | Revisión de documentación, generación de contenido estructurado (este archivo y el openapi.yaml) |
+|---|---|---|
+| GitHub Copilot | Microsoft / OpenAI | Autocompletado de codigo en tiempo real |
+| ChatGPT (GPT-4o) | OpenAI | Consultas de diseno y resolucion de errores |
+| Google Gemini | Google DeepMind | Revision de documentacion y generacion de archivos |
 
----
+## Detalle del Uso por Modulo
 
-## Detalle del Uso por Módulo
+### Backend - NestJS (BackendFinsense-main/)
 
-### Backend — NestJS (`BackendFinsense-main/`)
+| Archivo / Modulo | Contribucion IA | Contribucion Propia |
+|---|---|---|
+| src/main.ts | Sugerencia de configuracion CORS | Uso de helmet, GlobalPrefix y puerto |
+| src/auth/auth.service.ts | Autocompletado de bcrypt y JWT | Flujo de doble token e integracion con Abstract Email API |
+| src/auth/auth.dto.ts | Decoradores iniciales de class-validator | Validaciones especificas del dominio |
+| src/transactions/transactions.service.ts | Paginacion en findAll | Auto-categorizacion por keywords y alertas |
+| src/gamification/gamification.service.ts | Estructura de logros | Quests, cofres y trivia financiera |
+| src/analytics/analytics.service.ts | Agregaciones de Prisma | Anomalias, benchmarks y predicciones |
+| prisma/schema.prisma | Relaciones entre modelos | Diseno completo del modelo de datos |
 
-| Archivo / Módulo | Contribución IA | Contribución Propia |
-|-----------------|-----------------|---------------------|
-| `src/main.ts` | Sugerencia del patrón de configuración CORS con variable de entorno | Decisión de usar `helmet()`, configuración del `GlobalPrefix`, ajuste de puerto |
-| `src/auth/auth.service.ts` | Autocompletado de lógica bcrypt y generación de tokens JWT | Flujo de doble token (access + refresh), integración con Abstract Email API, inicialización de streak/XP |
-| `src/auth/auth.dto.ts` | Sugerencia inicial de decoradores `class-validator` | Validación específica del dominio del proyecto |
-| `src/transactions/transactions.service.ts` | Estructura base de `findAll` con paginación | Auto-categorización por keywords, lógica de streak, alertas de presupuesto, manejo de zonas horarias |
-| `src/gamification/gamification.service.ts` | Estructura de logros y tablas de XP | Sistema de quests, mecánica de cofres, integración con trivia financiera, lógica de niveles |
-| `src/analytics/analytics.service.ts` | Estructura de agregaciones Prisma | Algoritmo de detección de anomalías, cálculo de benchmarks por ciudad, predicciones de gasto |
-| `prisma/schema.prisma` | Sugerencias de relaciones entre modelos | Diseño completo del modelo de datos del dominio |
+### Frontend - Next.js (Finsense-Frontend/)
 
-### Frontend — Next.js (`Finsense-Frontend/`)
+| Archivo / Modulo | Contribucion IA | Contribucion Propia |
+|---|---|---|
+| lib/apiClient.ts | Interceptores Axios con refresh token | Cola de reintentos y manejo de cookies |
+| middleware.ts | Decodificacion JWT en Edge Runtime | Logica de expiracion y redireccion |
+| store/authStore.ts | Estructura base de Zustand con persist | Estado global de preferencias y usuario |
+| app/page.tsx | Estructura JSX basica | Diseno visual, animaciones y contenido |
+| services/*.ts | Funciones de fetch basicas | Mapeo de respuestas y manejo de errores |
+| app/globals.css | Variables CSS iniciales | Paleta de colores y estilos globales |
 
-| Archivo / Módulo | Contribución IA | Contribución Propia |
-|-----------------|-----------------|---------------------|
-| `lib/apiClient.ts` | Patrón base de interceptores Axios con refresh token | Cola de reintentos (`failedQueue`), manejo de cookies vs localStorage |
-| `middleware.ts` | Sugerencia de decodificación JWT sin librería en Edge Runtime | Lógica de expiración con buffer, limpieza de cookies al redirigir |
-| `store/authStore.ts` | Estructura base de Zustand con `persist` | Campos específicos del dominio: `isPanicMode`, `preferences`, `updateUserStats` |
-| `app/page.tsx` | Asistencia en estructura JSX de componentes UI | Diseño visual, gradientes, animaciones, contenido en español contextualizado |
-| `services/*.ts` (16 servicios) | Generación de funciones de fetch básicas | Mapeo de respuestas, manejo de errores, integración con el store |
-| `app/globals.css` | Sugerencias de variables CSS para el design system | Paleta de colores, animaciones personalizadas, modo oscuro/claro |
+### Pruebas (tests/)
 
-### Pruebas (`tests/`)
-
-| Archivo | Contribución IA | Contribución Propia |
-|---------|-----------------|---------------------|
-| `selenium/test_full_user_flow.py` | Estructura base del patrón POM (Page Object Model) | Pasos de prueba, selectores CSS/XPath de FinSense, aserciones del flujo |
-| `selenium/pages/*.py` | Sugerencia del patrón de clase POM | Implementación con selectores reales de la interfaz |
-| `jmeter/Finsense_LoadTest.jmx` | Asistencia en assertions de tiempo de respuesta | Grupos de prueba, endpoints seleccionados, escenarios de carga |
-
----
+| Archivo | Contribucion IA | Contribucion Propia |
+|---|---|---|
+| selenium/test_full_user_flow.py | Estructura base POM | Pasos de prueba y aserciones |
+| jmeter/Finsense_LoadTest.jmx | Assertions de tiempo de respuesta | Escenarios de carga y endpoints |
 
 ## Lo que NO fue generado por IA
 
-Los siguientes elementos fueron diseñados y desarrollados íntegramente sin asistencia de IA:
+Los siguientes elementos fueron desarrollados integramente por el equipo:
 
-- **Concepto y dominio:** App de finanzas personales para estudiantes universitarios de Chiapas, con benchmarks locales de Tuxtla Gutiérrez.
-- **Arquitectura del sistema:** Decisión de usar NestJS + Prisma + PostgreSQL + Next.js (App Router).
-- **Modelo de datos Prisma:** El esquema completo fue diseñado desde cero para los requisitos del proyecto.
-- **Sistema de gamificación:** Mecánica de streaks, XP, niveles, cofres y logros fue conceptualizada por el equipo.
-- **Auto-categorización por keywords:** Algoritmo que asigna categorías automáticamente por descripción.
-- **Benchmarks de Tuxtla Gutiérrez:** Datos de referencia para comparar gastos con promedios locales.
-- **Pruebas de integración:** Escenarios de JMeter y flujos E2E Selenium diseñados y ejecutados por el equipo.
-- **Despliegue:** Configuración en Vercel (frontend) y Render (backend) realizada manualmente.
+* Concepto y dominio de la aplicacion enfocado en estudiantes de Chiapas.
+* Arquitectura del sistema en NestJS, Prisma, PostgreSQL y Next.js.
+* Modelo de datos completo en Prisma.
+* Sistema de gamificacion (streaks, XP, niveles y logros).
+* Algoritmo de auto-categorizacion por palabras clave.
+* Datos de benchmarks locales de Tuxtla Gutierrez.
+* Pruebas de integracion con JMeter y Selenium.
+* Configuracion de despliegue en Vercel y Render.
 
----
+## Justificacion del Uso de IA
 
-## Justificación del Uso de IA
+1. Productividad: Aceleracion de escritura de codigo repetitivo.
+2. Aprendizaje asistido: Comprension de patrones como refresh token.
+3. Depuracion: Identificacion de causas raiz en errores de compilacion y entorno.
+4. Documentacion: Estructuracion de archivos de documentacion y especificaciones.
 
-1. **Productividad:** GitHub Copilot aceleró la escritura de código repetitivo (DTOs, módulos NestJS, servicios CRUD básicos), permitiendo enfocarse en la lógica diferenciadora del proyecto.
 
-2. **Aprendizaje asistido:** Se usó ChatGPT para entender el patrón de refresh token con colas de reintentos, que luego fue implementado y adaptado manualmente.
-
-3. **Depuración:** En errores complejos, se consultó IA para identificar la causa raíz, pero la solución fue implementada y validada de forma independiente.
-
----
-
-## Declaración de Integridad Académica
-
-El equipo declara que:
-
-- El código fuente fue **comprendido, revisado y adaptado** por los integrantes del equipo. No se copió código sin entenderlo.
-- El uso de IA fue **una herramienta de apoyo**, no un sustituto del aprendizaje o el trabajo académico.
-- Todos los resultados funcionales (endpoints activos en `https://finsense-full-seven.vercel.app`, pruebas ejecutadas con resultados CSV reales, despliegue en producción) son evidencia de trabajo real y funcional.
