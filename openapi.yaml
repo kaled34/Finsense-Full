@@ -1,0 +1,1847 @@
+openapi: 3.0.3
+
+info:
+  title: FinSense API
+  description: |
+    API REST del sistema FinSense — Plataforma de gestión financiera personal para estudiantes universitarios.
+
+    ## Autenticación
+    La mayoría de los endpoints requieren un JWT en el header `Authorization: Bearer <token>`.
+    Los tokens se obtienen mediante `POST /auth/login` o `POST /auth/register`.
+
+    ## Base URL
+    - **Producción:** `https://finsense-backend.onrender.com/api`
+    - **Desarrollo local:** `http://localhost:3001/api`
+
+  version: "1.0.0"
+  contact:
+    name: Equipo FinSense
+    email: 243759@ids.upchiapas.edu.mx
+  license:
+    name: Proyecto Académico — UPChiapas 2026
+
+servers:
+  - url: https://finsense-backend.onrender.com/api
+    description: Servidor de producción (Render)
+  - url: http://localhost:3001/api
+    description: Desarrollo local
+
+tags:
+  - name: Auth
+    description: Registro, inicio de sesión y gestión de perfil
+  - name: Transactions
+    description: CRUD de transacciones (ingresos y gastos)
+  - name: Goals
+    description: Metas de ahorro
+  - name: Budgets
+    description: Presupuestos por categoría y mes
+  - name: Analytics
+    description: Análisis, estadísticas y predicciones
+  - name: Subscriptions
+    description: Suscripciones recurrentes
+  - name: Groups
+    description: Grupos de gastos compartidos
+  - name: Notifications
+    description: Notificaciones y alertas
+  - name: Gamification
+    description: XP, logros, leaderboard y tienda
+  - name: Investments
+    description: Portafolio de inversiones
+  - name: Reports
+    description: Reportes exportables (CSV)
+  - name: Calendar Events
+    description: Eventos financieros en calendario
+
+# ──────────────────────────────────────────────────────────────────
+# COMPONENTS
+# ──────────────────────────────────────────────────────────────────
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    # ── Auth ──────────────────────────────────────────
+    RegisterRequest:
+      type: object
+      required: [email, password, name]
+      properties:
+        email:
+          type: string
+          format: email
+          example: maria@upchiapas.edu.mx
+        password:
+          type: string
+          minLength: 6
+          example: mipassword123
+        name:
+          type: string
+          example: María López
+        city:
+          type: string
+          example: Tuxtla Gutiérrez
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+          example: maria@upchiapas.edu.mx
+        password:
+          type: string
+          example: mipassword123
+
+    AuthResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        refreshToken:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        user:
+          $ref: '#/components/schemas/UserProfile'
+
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+        name:
+          type: string
+        city:
+          type: string
+        avatar:
+          type: string
+          nullable: true
+        level:
+          type: integer
+          example: 3
+        xp:
+          type: integer
+          example: 1240
+        xpToNextLevel:
+          type: integer
+          example: 1500
+        streakDays:
+          type: integer
+          example: 7
+        maxStreak:
+          type: integer
+          example: 14
+        coins:
+          type: integer
+          example: 85
+        monthsActive:
+          type: integer
+          example: 3
+        goalsCompleted:
+          type: integer
+          example: 2
+        registeredToday:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+
+    # ── Transactions ───────────────────────────────────
+    CreateTransactionRequest:
+      type: object
+      required: [amount, type]
+      properties:
+        amount:
+          type: number
+          minimum: 0.01
+          example: 150.00
+        type:
+          type: string
+          enum: [income, expense]
+          example: expense
+        categoryId:
+          type: string
+          description: UUID o slug de categoría (e.g. "food", "transport")
+          example: food
+        categoryName:
+          type: string
+          description: Nombre alternativo de categoría (fallback)
+          example: Alimentación
+        description:
+          type: string
+          example: tacos en el centro
+        date:
+          type: string
+          format: date
+          example: "2026-05-23"
+        groupId:
+          type: string
+          format: uuid
+          nullable: true
+
+    UpdateTransactionRequest:
+      type: object
+      properties:
+        amount:
+          type: number
+          minimum: 0.01
+        type:
+          type: string
+          enum: [income, expense]
+        categoryId:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+          format: date
+
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          example: 150.00
+        type:
+          type: string
+          enum: [income, expense]
+        description:
+          type: string
+        date:
+          type: string
+          format: date-time
+        categoryId:
+          type: string
+          format: uuid
+          nullable: true
+        category:
+          $ref: '#/components/schemas/Category'
+        groupId:
+          type: string
+          nullable: true
+
+    TransactionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        total:
+          type: integer
+          example: 87
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 50
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: Alimentación
+        icon:
+          type: string
+          example: "🍔"
+        color:
+          type: string
+          example: "#FF6B6B"
+
+    # ── Goals ─────────────────────────────────────────
+    CreateGoalRequest:
+      type: object
+      required: [name, targetAmount]
+      properties:
+        name:
+          type: string
+          example: Laptop nueva
+        targetAmount:
+          type: number
+          minimum: 1
+          example: 15000
+        deadline:
+          type: string
+          format: date
+          example: "2026-12-31"
+        icon:
+          type: string
+          example: "💻"
+        color:
+          type: string
+          example: "#6C63FF"
+
+    DepositGoalRequest:
+      type: object
+      required: [amount]
+      properties:
+        amount:
+          type: number
+          minimum: 0.01
+          example: 500
+
+    Goal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        targetAmount:
+          type: number
+        currentAmount:
+          type: number
+        status:
+          type: string
+          enum: [active, completed, cancelled]
+        deadline:
+          type: string
+          format: date
+          nullable: true
+        icon:
+          type: string
+          nullable: true
+        color:
+          type: string
+          nullable: true
+
+    DepositResponse:
+      type: object
+      properties:
+        goal:
+          $ref: '#/components/schemas/Goal'
+        completed:
+          type: boolean
+        xpGained:
+          type: integer
+          example: 20
+
+    # ── Budgets ───────────────────────────────────────
+    CreateBudgetRequest:
+      type: object
+      required: [categoryId, limitAmount]
+      properties:
+        categoryId:
+          type: string
+          format: uuid
+        limitAmount:
+          type: number
+          minimum: 1
+          example: 3000
+        month:
+          type: string
+          pattern: '^\d{4}-\d{2}$'
+          example: "2026-08"
+
+    Budget:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        categoryId:
+          type: string
+        categoryName:
+          type: string
+          example: Alimentación
+        categoryIcon:
+          type: string
+        categoryColor:
+          type: string
+        limit:
+          type: number
+        spent:
+          type: number
+        pct:
+          type: number
+          description: Porcentaje gastado (0-100)
+        status:
+          type: string
+          enum: [healthy, warning, exceeded]
+        month:
+          type: string
+          example: "2026-08"
+
+    # ── Subscriptions ─────────────────────────────────
+    CreateSubscriptionRequest:
+      type: object
+      required: [name, cost, nextBillingDate]
+      properties:
+        name:
+          type: string
+          example: Netflix
+        cost:
+          type: number
+          example: 219
+        currency:
+          type: string
+          default: MXN
+          example: MXN
+        billingCycle:
+          type: string
+          enum: [monthly, yearly]
+          default: monthly
+        nextBillingDate:
+          type: string
+          format: date
+          example: "2026-09-01"
+        category:
+          type: string
+          example: Entretenimiento
+        iconUrl:
+          type: string
+          nullable: true
+
+    # ── Groups ────────────────────────────────────────
+    CreateGroupRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          example: Compañeros de depa
+        memberIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+
+    AddExpenseRequest:
+      type: object
+      required: [amount, description, splitBetween]
+      properties:
+        amount:
+          type: number
+          minimum: 0.01
+          example: 800
+        description:
+          type: string
+          example: Pizza del viernes
+        splitBetween:
+          type: array
+          items:
+            type: string
+            format: uuid
+        paidBy:
+          type: string
+          format: uuid
+          nullable: true
+
+    # ── Notifications ─────────────────────────────────
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum: [budget_exceeded, budget_warning, goal_completed, streak_milestone, subscription_due]
+        title:
+          type: string
+        body:
+          type: string
+        read:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+
+    # ── Generic ───────────────────────────────────────
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+        error:
+          type: string
+
+# ──────────────────────────────────────────────────────────────────
+# PATHS
+# ──────────────────────────────────────────────────────────────────
+paths:
+
+  # ═══════════════════════════════════════════
+  # AUTH
+  # ═══════════════════════════════════════════
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Registrar nuevo usuario
+      description: Crea una cuenta nueva. Valida el email contra Abstract Email API si la clave está configurada. Inicializa streak y XP.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        "201":
+          description: Usuario creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+              example:
+                accessToken: "eyJhbGci..."
+                refreshToken: "eyJhbGci..."
+                user:
+                  id: "uuid-123"
+                  email: "maria@upchiapas.edu.mx"
+                  name: "María López"
+                  city: "Tuxtla Gutiérrez"
+        "400":
+          description: Email inválido o no existente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "409":
+          description: El email ya está registrado
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Iniciar sesión
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        "200":
+          description: Login exitoso — retorna tokens JWT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        "401":
+          description: Credenciales inválidas
+
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      summary: Renovar access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        "200":
+          description: Nuevo access token generado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  refreshToken:
+                    type: string
+        "401":
+          description: Refresh token inválido o expirado
+
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Obtener perfil del usuario autenticado
+      description: Retorna datos del usuario junto con streak, XP, nivel, racha, metas completadas.
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Perfil completo del usuario
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        "401":
+          description: Token inválido o expirado
+
+  /auth/profile:
+    patch:
+      tags: [Auth]
+      summary: Actualizar perfil del usuario
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                city:
+                  type: string
+                avatar:
+                  type: string
+      responses:
+        "200":
+          description: Perfil actualizado
+
+  /auth/users:
+    get:
+      tags: [Auth]
+      summary: Listar todos los usuarios (excepto el actual)
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de usuarios con estado de amistad
+
+  /auth/users/search:
+    get:
+      tags: [Auth]
+      summary: Buscar usuarios por nombre o email
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lista de usuarios que coinciden con la búsqueda
+
+  # ═══════════════════════════════════════════
+  # TRANSACTIONS
+  # ═══════════════════════════════════════════
+  /transactions:
+    get:
+      tags: [Transactions]
+      summary: Listar transacciones del usuario con paginación y filtros
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [income, expense]
+          description: Filtrar por tipo
+        - name: category
+          in: query
+          schema:
+            type: string
+          description: Nombre de la categoría
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date
+          example: "2026-07-01"
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date
+          example: "2026-07-31"
+        - name: groupId
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: q
+          in: query
+          schema:
+            type: string
+          description: Búsqueda en descripción y categoría
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        "200":
+          description: Lista paginada de transacciones
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionListResponse'
+        "401":
+          description: No autorizado
+
+    post:
+      tags: [Transactions]
+      summary: Crear nueva transacción (ingreso o gasto)
+      description: |
+        La categoría se resuelve automáticamente en este orden:
+        1. UUID de categoría en `categoryId`
+        2. Slug de categoría (ej. "food", "transport")
+        3. Campo `categoryName`
+        4. Auto-categorización por keywords de la `description`
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransactionRequest'
+            examples:
+              gasto_comida:
+                summary: Gasto en comida (auto-categorización)
+                value:
+                  amount: 150
+                  type: expense
+                  description: tacos en el centro
+                  date: "2026-07-15"
+              ingreso_salario:
+                summary: Ingreso por sueldo
+                value:
+                  amount: 8000
+                  type: income
+                  categoryId: salary
+                  description: Pago quincenal
+      responses:
+        "201":
+          description: Transacción creada; incluye resultado de actualización de streak
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Transaction'
+                  - type: object
+                    properties:
+                      streakResult:
+                        type: object
+                        properties:
+                          currentStreak:
+                            type: integer
+                          longestStreak:
+                            type: integer
+                          xpAwarded:
+                            type: integer
+                          totalXp:
+                            type: integer
+                          level:
+                            type: integer
+        "400":
+          description: Fecha inválida u otro error de validación
+        "401":
+          description: No autorizado
+
+  /transactions/{id}:
+    put:
+      tags: [Transactions]
+      summary: Actualizar transacción existente
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTransactionRequest'
+      responses:
+        "200":
+          description: Transacción actualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        "404":
+          description: Transacción no encontrada
+
+    delete:
+      tags: [Transactions]
+      summary: Eliminar transacción
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Transacción eliminada
+        "404":
+          description: Transacción no encontrada
+
+  # ═══════════════════════════════════════════
+  # GOALS
+  # ═══════════════════════════════════════════
+  /goals:
+    get:
+      tags: [Goals]
+      summary: Listar metas de ahorro del usuario
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de metas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Goal'
+
+    post:
+      tags: [Goals]
+      summary: Crear nueva meta de ahorro
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGoalRequest'
+      responses:
+        "201":
+          description: Meta creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Goal'
+
+  /goals/{id}:
+    put:
+      tags: [Goals]
+      summary: Actualizar meta existente
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGoalRequest'
+      responses:
+        "200":
+          description: Meta actualizada
+        "404":
+          description: Meta no encontrada
+
+    delete:
+      tags: [Goals]
+      summary: Eliminar meta
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Meta eliminada
+
+  /goals/{id}/deposit:
+    post:
+      tags: [Goals]
+      summary: Realizar abono a una meta (+XP)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepositGoalRequest'
+      responses:
+        "201":
+          description: Abono realizado; indica si la meta se completó y XP ganado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepositResponse'
+
+  # ═══════════════════════════════════════════
+  # BUDGETS
+  # ═══════════════════════════════════════════
+  /budgets:
+    get:
+      tags: [Budgets]
+      summary: Obtener presupuestos del mes actual (o un mes específico)
+      description: Incluye gasto real calculado desde las transacciones del período.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: month
+          in: query
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}$'
+          example: "2026-08"
+      responses:
+        "200":
+          description: Lista de presupuestos con gasto real
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Budget'
+
+    post:
+      tags: [Budgets]
+      summary: Crear o actualizar presupuesto (upsert por categoría+mes)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBudgetRequest'
+      responses:
+        "201":
+          description: Presupuesto creado o actualizado
+
+  /budgets/categories:
+    get:
+      tags: [Budgets]
+      summary: Listar todas las categorías disponibles
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de categorías
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+
+  /budgets/{id}:
+    put:
+      tags: [Budgets]
+      summary: Actualizar límite de presupuesto
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [limitAmount]
+              properties:
+                limitAmount:
+                  type: number
+      responses:
+        "200":
+          description: Presupuesto actualizado
+
+    delete:
+      tags: [Budgets]
+      summary: Eliminar presupuesto
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Presupuesto eliminado
+
+  # ═══════════════════════════════════════════
+  # ANALYTICS
+  # ═══════════════════════════════════════════
+  /analytics/summary:
+    get:
+      tags: [Analytics]
+      summary: Resumen financiero por período
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: period
+          in: query
+          schema:
+            type: string
+          description: "Período (e.g. '2026-07' para mes o 'week' / 'month' / 'year')"
+      responses:
+        "200":
+          description: Resumen con totales, distribución por categoría, etc.
+
+  /analytics/benchmarks:
+    get:
+      tags: [Analytics]
+      summary: Comparar gastos del usuario con benchmarks de su ciudad
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: city
+          in: query
+          schema:
+            type: string
+          example: Tuxtla Gutiérrez
+      responses:
+        "200":
+          description: Benchmarks por categoría vs promedios de la ciudad
+          content:
+            application/json:
+              example:
+                category: Alimentación
+                city: Tuxtla Gutiérrez
+                userAmount: 2800
+                benchmark:
+                  avgAmount: 3200
+                  percentile25: 1800
+                  percentile75: 4500
+                percentile: promedio_bajo
+
+  /analytics/monthly-comparison:
+    get:
+      tags: [Analytics]
+      summary: Comparación de gastos mes a mes (últimos N meses)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: months
+          in: query
+          schema:
+            type: integer
+            default: 6
+      responses:
+        "200":
+          description: Serie temporal de ingresos y gastos por mes
+
+  /analytics/predictions:
+    get:
+      tags: [Analytics]
+      summary: Predicciones de gasto para el mes actual
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Proyecciones basadas en historial
+
+  /analytics/anomalies:
+    get:
+      tags: [Analytics]
+      summary: Detectar gastos anómalos o inusuales
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de transacciones con desviación estadística significativa
+
+  /analytics/heatmap:
+    get:
+      tags: [Analytics]
+      summary: Mapa de calor de actividad financiera por día
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Datos de actividad por fecha para el heatmap
+
+  /analytics/fugas:
+    get:
+      tags: [Analytics]
+      summary: Detectar micro-gastos / "fugas" de dinero
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: number
+            default: 200
+          description: Monto máximo para considerar micro-gasto
+      responses:
+        "200":
+          description: Lista de micro-gastos frecuentes
+
+  # ═══════════════════════════════════════════
+  # SUBSCRIPTIONS
+  # ═══════════════════════════════════════════
+  /subscriptions:
+    get:
+      tags: [Subscriptions]
+      summary: Listar suscripciones del usuario
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de suscripciones activas y pausadas
+
+    post:
+      tags: [Subscriptions]
+      summary: Crear nueva suscripción
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubscriptionRequest'
+      responses:
+        "201":
+          description: Suscripción creada
+
+  /subscriptions/{id}:
+    put:
+      tags: [Subscriptions]
+      summary: Actualizar suscripción (incluyendo pausar/cancelar)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                cost:
+                  type: number
+                billingCycle:
+                  type: string
+                  enum: [monthly, yearly]
+                nextBillingDate:
+                  type: string
+                  format: date
+                status:
+                  type: string
+                  enum: [active, paused, cancelled]
+      responses:
+        "200":
+          description: Suscripción actualizada
+
+    delete:
+      tags: [Subscriptions]
+      summary: Eliminar suscripción
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Suscripción eliminada
+
+  # ═══════════════════════════════════════════
+  # GROUPS
+  # ═══════════════════════════════════════════
+  /groups:
+    get:
+      tags: [Groups]
+      summary: Listar grupos del usuario
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de grupos donde el usuario es miembro
+
+    post:
+      tags: [Groups]
+      summary: Crear nuevo grupo de gastos
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupRequest'
+      responses:
+        "201":
+          description: Grupo creado
+
+  /groups/{id}:
+    get:
+      tags: [Groups]
+      summary: Obtener detalle de un grupo
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Detalle del grupo con miembros
+
+  /groups/{id}/members:
+    post:
+      tags: [Groups]
+      summary: Agregar miembro al grupo
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId]
+              properties:
+                userId:
+                  type: string
+                  format: uuid
+      responses:
+        "201":
+          description: Miembro agregado
+
+  /groups/{id}/expenses:
+    get:
+      tags: [Groups]
+      summary: Listar gastos del grupo
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Lista de gastos del grupo
+
+    post:
+      tags: [Groups]
+      summary: Registrar gasto grupal
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddExpenseRequest'
+      responses:
+        "201":
+          description: Gasto grupal registrado y balances actualizados
+
+  /groups/{id}/balances:
+    get:
+      tags: [Groups]
+      summary: Ver balances del grupo (quién le debe a quién)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Balances entre miembros del grupo
+
+  /groups/{id}/debts/simplified:
+    get:
+      tags: [Groups]
+      summary: Obtener deudas simplificadas (mínimo de transferencias)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Lista simplificada de transferencias para saldar cuentas
+
+  /groups/{id}/messages:
+    get:
+      tags: [Groups]
+      summary: Obtener mensajes del chat del grupo
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Historial de mensajes del grupo
+
+  # ═══════════════════════════════════════════
+  # NOTIFICATIONS
+  # ═══════════════════════════════════════════
+  /notifications:
+    get:
+      tags: [Notifications]
+      summary: Obtener feed de notificaciones del usuario
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de notificaciones
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+
+  /notifications/generate:
+    post:
+      tags: [Notifications]
+      summary: Generar notificación inteligente basada en comportamiento
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Notificación generada
+
+  /notifications/read-all:
+    patch:
+      tags: [Notifications]
+      summary: Marcar todas las notificaciones como leídas
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Todas las notificaciones marcadas como leídas
+
+  /notifications/{id}/read:
+    patch:
+      tags: [Notifications]
+      summary: Marcar una notificación como leída
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Notificación marcada como leída
+
+  /notifications/{id}:
+    delete:
+      tags: [Notifications]
+      summary: Eliminar notificación
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Notificación eliminada
+
+  # ═══════════════════════════════════════════
+  # GAMIFICATION
+  # ═══════════════════════════════════════════
+  /gamification/profile:
+    get:
+      tags: [Gamification]
+      summary: Obtener perfil de gamificación del usuario (XP, nivel, racha, logros, monedas)
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Perfil completo de gamificación
+
+  /gamification/users/{id}/profile:
+    get:
+      tags: [Gamification]
+      summary: Obtener perfil público de gamificación de otro usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Perfil público de gamificación
+
+  /gamification/quests:
+    get:
+      tags: [Gamification]
+      summary: Obtener misiones/quests del usuario
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de quests activas con progreso
+
+  /gamification/achievements:
+    get:
+      tags: [Gamification]
+      summary: Obtener logros del usuario
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de logros desbloqueados y en progreso
+
+  /gamification/leaderboard:
+    get:
+      tags: [Gamification]
+      summary: Tabla de líderes por XP
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Ranking de usuarios por XP total
+
+  /gamification/purchase:
+    post:
+      tags: [Gamification]
+      summary: Comprar ítem en la tienda (con monedas)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [itemId, price, type]
+              properties:
+                itemId:
+                  type: string
+                price:
+                  type: integer
+                type:
+                  type: string
+                metadata:
+                  type: object
+      responses:
+        "201":
+          description: Compra realizada exitosamente
+
+  /gamification/daily-reward:
+    post:
+      tags: [Gamification]
+      summary: Reclamar recompensa diaria
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Recompensa reclamada o ya reclamada hoy
+          content:
+            application/json:
+              example:
+                success: true
+                xpAwarded: 25
+                coinsAwarded: 10
+
+  /gamification/equip-skin:
+    post:
+      tags: [Gamification]
+      summary: Equipar skin de mascota
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [skinId]
+              properties:
+                skinId:
+                  type: string
+      responses:
+        "201":
+          description: Skin equipada
+
+  /gamification/open-chest:
+    post:
+      tags: [Gamification]
+      summary: Abrir cofre de recompensas aleatorias
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Contenido del cofre abierto
+
+  /gamification/game-score:
+    post:
+      tags: [Gamification]
+      summary: Enviar puntuación de minijuego y ganar XP
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                xpReward:
+                  type: integer
+                gameId:
+                  type: string
+      responses:
+        "201":
+          description: XP otorgado por el minijuego
+
+  /gamification/trivia-questions:
+    get:
+      tags: [Gamification]
+      summary: Obtener preguntas de trivia financiera
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de preguntas de trivia generadas
+
+  /gamification/budget-game-data:
+    get:
+      tags: [Gamification]
+      summary: Obtener datos para el juego de presupuesto
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Datos del juego de presupuesto
+
+  # ═══════════════════════════════════════════
+  # INVESTMENTS
+  # ═══════════════════════════════════════════
+  /investments:
+    get:
+      tags: [Investments]
+      summary: Listar inversiones del usuario
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Portafolio de inversiones con valor actual
+
+    post:
+      tags: [Investments]
+      summary: Registrar nueva inversión
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, type, initialAmount, currentValue, purchaseDate]
+              properties:
+                name:
+                  type: string
+                  example: Apple Inc.
+                type:
+                  type: string
+                  example: stocks
+                initialAmount:
+                  type: number
+                  example: 5000
+                currentValue:
+                  type: number
+                  example: 5800
+                purchaseDate:
+                  type: string
+                  format: date
+                ticker:
+                  type: string
+                  example: AAPL
+                shares:
+                  type: number
+                notes:
+                  type: string
+      responses:
+        "201":
+          description: Inversión registrada
+
+  /investments/search:
+    get:
+      tags: [Investments]
+      summary: Buscar ticker de acción/activo
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          example: AAPL
+      responses:
+        "200":
+          description: Resultados de búsqueda de tickers
+
+  /investments/sync:
+    post:
+      tags: [Investments]
+      summary: Sincronizar precios actuales de inversiones
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Precios actualizados desde API de mercado
+
+  /investments/{id}:
+    put:
+      tags: [Investments]
+      summary: Actualizar inversión existente
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                currentValue:
+                  type: number
+                name:
+                  type: string
+                notes:
+                  type: string
+      responses:
+        "200":
+          description: Inversión actualizada
+
+    delete:
+      tags: [Investments]
+      summary: Eliminar inversión
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Inversión eliminada
+
+  # ═══════════════════════════════════════════
+  # REPORTS
+  # ═══════════════════════════════════════════
+  /reports/csv:
+    get:
+      tags: [Reports]
+      summary: Exportar transacciones como CSV (descarga directa)
+      description: Genera un archivo CSV con BOM UTF-8 para compatibilidad con Excel.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: period
+          in: query
+          schema:
+            type: string
+          example: month
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: Archivo CSV
+          content:
+            text/csv:
+              schema:
+                type: string
+
+  /reports/summary:
+    get:
+      tags: [Reports]
+      summary: Obtener reporte resumido de transacciones
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: period
+          in: query
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: Reporte con totales y distribución por categoría
+
+  # ═══════════════════════════════════════════
+  # CALENDAR EVENTS
+  # ═══════════════════════════════════════════
+  /calendar-events:
+    get:
+      tags: [Calendar Events]
+      summary: Listar eventos financieros en el calendario
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de eventos del calendario
+
+    post:
+      tags: [Calendar Events]
+      summary: Crear nuevo evento en el calendario
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                amount:
+                  type: number
+                  nullable: true
+                type:
+                  type: string
+      responses:
+        "201":
+          description: Evento creado
+
+  /calendar-events/{id}:
+    delete:
+      tags: [Calendar Events]
+      summary: Eliminar evento del calendario
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Evento eliminado
