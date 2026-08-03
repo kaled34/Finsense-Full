@@ -47,7 +47,6 @@ export default function NewTransactionPage() {
   const router = useRouter();
   const { addToast } = useUIStore();
   const { updateUserStats, user } = useAuthStore();
-  const { addTransaction } = useTransactionStore();
 
   const [type, setType] = useState<TransactionType>('expense');
   const [amount, setAmount] = useState('0');
@@ -142,9 +141,6 @@ export default function NewTransactionPage() {
         note,
         date,
       });
-      if (res.transaction) {
-        addTransaction(res.transaction);
-      }
       if (res.streakResult && user) {
         updateUserStats(res.streakResult.currentStreak, user.level, res.streakResult.longestStreak);
       }
