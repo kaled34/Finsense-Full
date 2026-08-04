@@ -68,9 +68,13 @@ export class AuthService {
   }
 
   async refresh(token: string) {
+    const jwtRefreshSecret = this.config.get<string>('JWT_REFRESH_SECRET');
+    if (!jwtRefreshSecret) {
+      throw new Error('JWT_REFRESH_SECRET environment variable must be set');
+    }
     try {
       const payload = this.jwt.verify(token, {
-        secret: this.config.get('JWT_REFRESH_SECRET') || 'default_jwt_refresh_secret_key_12345',
+        secret: jwtRefreshSecret,
       });
       return this.generateTokens(payload.sub, payload.email);
     } catch {
@@ -230,13 +234,20 @@ export class AuthService {
   }
 
   private generateTokens(userId: string, email: string) {
+    const jwtSecret = this.config.get<string>('JWT_SECRET');
+    const jwtRefreshSecret = this.config.get<string>('JWT_REFRESH_SECRET');
+
+    if (!jwtSecret || !jwtRefreshSecret) {
+      throw new Error('JWT_SECRET and JWT_REFRESH_SECRET environment variables must be set');
+    }
+
     const payload = { sub: userId, email };
     const accessToken = this.jwt.sign(payload, {
-      secret: this.config.get('JWT_SECRET') || 'super_secret_jwt_key_12345',
+      secret: jwtSecret,
       expiresIn: this.config.get('JWT_EXPIRES_IN') || '1d',
     });
     const refreshToken = this.jwt.sign(payload, {
-      secret: this.config.get('JWT_REFRESH_SECRET') || 'default_jwt_refresh_secret_key_12345',
+      secret: jwtRefreshSecret,
       expiresIn: this.config.get('JWT_REFRESH_EXPIRES_IN') || '7d',
     });
     return { accessToken, refreshToken };
